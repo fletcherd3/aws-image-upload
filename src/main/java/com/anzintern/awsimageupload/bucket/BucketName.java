@@ -3,7 +3,7 @@ package com.anzintern.awsimageupload.bucket;
 
 public enum BucketName {
 
-	PROFILE_IMAGE("");
+	PROFILE_IMAGE("fletchers-image-upload");
 
 	private final String bucketName;
 
