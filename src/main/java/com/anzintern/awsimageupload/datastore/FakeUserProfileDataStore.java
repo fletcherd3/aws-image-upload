@@ -1,6 +1,5 @@
 package com.anzintern.awsimageupload.datastore;
 
-import java.nio.file.attribute.UserPrincipal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
