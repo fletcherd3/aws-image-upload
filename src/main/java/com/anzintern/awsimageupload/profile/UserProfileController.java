@@ -1,5 +1,6 @@
 package com.anzintern.awsimageupload.profile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
@@ -34,13 +35,13 @@ public class UserProfileController {
 	}
 
 	@PostMapping(
-			path = "{userProfileId}/image/download",
+			path = "{userProfileId}/image/upload",
 			consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
 			produces = MediaType.APPLICATION_JSON_VALUE
 	)
 	public void uploadUserProfileImage(
 			@PathVariable("userProfileId") UUID userProfileId,
-			@RequestParam("file") MultipartFile file) {
+			@RequestParam("file") MultipartFile file) throws IOException {
 		userProfileService.uploadUserProfileImage(userProfileId, file);
 	}
 

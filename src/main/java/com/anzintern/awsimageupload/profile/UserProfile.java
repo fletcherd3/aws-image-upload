@@ -4,6 +4,8 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
+//lombok
+
 public class UserProfile {
 
 	private UUID userProfileId;
@@ -36,7 +38,7 @@ public class UserProfile {
 	}
 
 	public UUID getUserProfileId() {
-		return userProfileId;
+		return this.userProfileId;
 	}
 
 	public void setUserProfileId(UUID userProfileId) {
