@@ -52,10 +52,23 @@ public class UserProfileService {
 		storeImageToS3(file, user, metadata);
 	}
 
+	public byte[] downloadUserProfileImage(UUID userProfileId) {
+		UserProfile user = getUserProfileOrThrow(userProfileId);
+		String path = String.format("%s/%s",
+				BucketName.PROFILE_IMAGE.getBucketName(),
+				user.getUserProfileId());
+
+		return user.getUserProfileImageLink()
+				.map(key -> fileStore.download(path, key))
+				.orElse(new byte[0]);
+	}
+
 	private void storeImageToS3(MultipartFile file, UserProfile user, Map<String, String> metadata) throws IOException {
 		String path = String.format("%s/%s", BucketName.PROFILE_IMAGE.getBucketName(), user.getUserProfileId());
 		String filename = String.format("%s-%s", file.getOriginalFilename(), UUID.randomUUID());
 		fileStore.save(path, filename, Optional.of(metadata), file.getInputStream());
+		// Update User Profiles image link
+		user.setUserProfileImageLink(filename);
 	}
 
 	private Map<String, String> extractMetadata(MultipartFile file) {
@@ -87,4 +100,6 @@ public class UserProfileService {
 			throw new IllegalStateException("Received file is empty");
 		}
 	}
+
+
 }

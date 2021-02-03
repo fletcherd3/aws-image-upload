@@ -21,18 +21,23 @@ const UserProfiles = () => {
   return userProfiles.map((userProfile, index) => {
     return (
         <div key={index}>
+          {userProfile.userProfileImageLink ? (
+              <img className="profile"
+                  src={`http://localhost:8080/api/v1/user-profile/${userProfile.userProfileId}/image/download`}
+              />
+          ) : null}
           <br/>
           <br/>
           <h1>{userProfile.userName}</h1>
           <p>{userProfile.userProfileId}</p>
-          <Dropzone {...userProfile}/>
+          <Dropzone userProfileId={userProfile.userProfileId} func={fetchUserProfiles}/>
           <br/>
         </div>
     )
   });
 }
 
-function Dropzone({ userProfileId }) {
+function Dropzone({ userProfileId, func }) {
   const onDrop = useCallback(acceptedFiles => {
     const file = acceptedFiles[0];
     console.log(file);
@@ -49,6 +54,8 @@ function Dropzone({ userProfileId }) {
         }
     ).then(() => {
         console.log("File uploaded successfully");
+        func();
+        this.forceUpdate();
     }).catch(err => {
         console.log(err);
     });
