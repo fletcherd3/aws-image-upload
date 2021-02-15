@@ -25,6 +25,12 @@ public class FileStore {
 		this.s3 = s3;
 	}
 
+	/**
+	 * Download the selecter image from AWS S3 bucket
+	 * @param path Path to the users bucket (format: {bucketName}/{userProfileId})
+	 * @param key Name of the specific image in path
+	 * @return image in byte array format
+	 */
 	public byte[] download(String path, String key) {
 		try {
 			S3Object object = s3.getObject(path, key);

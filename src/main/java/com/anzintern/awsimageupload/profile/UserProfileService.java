@@ -58,9 +58,12 @@ public class UserProfileService {
 				BucketName.PROFILE_IMAGE.getBucketName(),
 				user.getUserProfileId());
 
-		return user.getUserProfileImageLink()
-				.map(key -> fileStore.download(path, key))
-				.orElse(new byte[0]);
+		String key = user.getUserProfileImageLink();
+
+		if (key != null) {
+			return fileStore.download(path, key);
+		}
+		return new byte[0];
 	}
 
 	private void storeImageToS3(MultipartFile file, UserProfile user, Map<String, String> metadata) throws IOException {

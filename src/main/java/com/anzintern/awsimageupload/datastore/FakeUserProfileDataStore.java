@@ -15,8 +15,8 @@ public class FakeUserProfileDataStore {
 
 	static {
 		USER_PROFILES.add(new UserProfile(UUID.nameUUIDFromBytes("fletcher".getBytes()), "fletcher_dick", null));
-		USER_PROFILES.add(new UserProfile(UUID.nameUUIDFromBytes("josh".getBytes()), "josh_gomez", null));
-		USER_PROFILES.add(new UserProfile(UUID.nameUUIDFromBytes("vasili".getBytes()), "vasili_aliashkevich", null));
+		USER_PROFILES.add(new UserProfile(UUID.nameUUIDFromBytes("user1".getBytes()), "user_1", null));
+		USER_PROFILES.add(new UserProfile(UUID.nameUUIDFromBytes("user2".getBytes()), "user_2", null));
 	}
 
 	public List<UserProfile> getUserProfiles() {
